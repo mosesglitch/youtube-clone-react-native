@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import VideoWatch from "./app/screens/VideoWatch";
 import SearchResults from "./app/screens/youtubeAPI";
 
 export default function App() {
@@ -7,6 +8,8 @@ export default function App() {
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
+
+      {/* <VideoWatch /> */}
       <SearchResults />
     </View>
   );

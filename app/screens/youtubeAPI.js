@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 function SearchResults(props) {
-  const query = "black hawk";
+  const query = "black";
   const [posts, setPosts] = useState([]);
+  const [videoList, setVideoList] = useState([]);
   useEffect(() => {
     axios({
       method: "GET",
@@ -22,15 +23,26 @@ function SearchResults(props) {
       .catch((error) => {
         console.log(error);
       });
-  }, [query]);
+  }, [posts]);
+
   useEffect(() => {
     if (posts.length > 0) {
-      console.log("posts trial", posts[2].id.videoId);
-
-      console.log("posts trial", posts[2].snippet.title);
+      const youtubeList = posts.map((video) => {
+        <View key={video.snippet.id}>
+          <Text>{video.snippet.title}</Text>
+          <Text>{video.snippet.channelTitle}</Text>
+        </View>;
+        console.log(video.snippet.title);
+        // console.log(video.snippet.channelTitle);
+      });
+      setVideoList(youtubeList);
     }
   }, [posts]);
-  return <Text>Hallo</Text>;
+  if (videoList > 0) {
+    return <Text>Hallos How are you</Text>;
+    // { videoList };
+  }
+  return <Text>Hallos</Text>;
 }
 
 export default SearchResults;
