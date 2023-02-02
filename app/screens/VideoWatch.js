@@ -10,7 +10,7 @@ import {
 import YoutubePlayer from "react-native-youtube-iframe";
 
 const VideoWatch = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
   return (
     <SafeAreaView style={styles.container}>
       <Button

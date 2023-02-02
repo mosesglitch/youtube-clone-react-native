@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Text, View, StyleSheet, TouchableWithoutFeedback } from "react-native";
-
+import VideoWatch from "./VideoWatch";
 function SearchResults(props) {
   const query = "black";
   const [posts, setPosts] = useState([]);
@@ -54,7 +54,14 @@ function SearchResults(props) {
     });
     setVideoList(youtubeList);
   }, [posts]);
-  if (posts.length > 0) {
+  if (posts.length > 0 && selectedVideoId) {
+    return (
+      <View>
+        <VideoWatch />
+        {videoList}
+      </View>
+    );
+  } else if (posts.length > 0) {
     return <View>{videoList}</View>;
   }
   return <Text>Hallos</Text>;
