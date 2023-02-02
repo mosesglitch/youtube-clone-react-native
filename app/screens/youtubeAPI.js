@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 
 function SearchResults(props) {
   const query = "black";
   const [posts, setPosts] = useState([]);
   const [videoList, setVideoList] = useState([]);
+  const [selectedVideoId, setVideoId] = useState();
+  const API_KEY = "AIzaSyBM-uSvj__c0uTgzrw_WI31EjGZMKZvyws";
+
+  const fetchVidId = (e) => {
+    setVideoId(e);
+  };
+  console.log("holla", selectedVideoId);
   useEffect(() => {
     axios({
       method: "GET",
@@ -13,7 +20,7 @@ function SearchResults(props) {
       params: {
         part: "snippet",
         maxResults: "20",
-        key: "AIzaSyBKs7Pp-_Zyfe1PqEqK5DKM_dZrCutHLmA",
+        key: API_KEY,
         q: query,
       },
     })
@@ -23,26 +30,50 @@ function SearchResults(props) {
       .catch((error) => {
         console.log(error);
       });
-  }, [posts]);
+  }, [query]);
 
   useEffect(() => {
-    if (posts.length > 0) {
-      const youtubeList = posts.map((video) => {
-        <View key={video.snippet.id}>
-          <Text>{video.snippet.title}</Text>
-          <Text>{video.snippet.channelTitle}</Text>
-        </View>;
-        console.log(video.snippet.title);
-        // console.log(video.snippet.channelTitle);
-      });
-      setVideoList(youtubeList);
-    }
+    const youtubeList = posts.map((video) => {
+      return (
+        <TouchableWithoutFeedback
+          id={video.snippet.id}
+          style={styles.list}
+          key={video.snippet.id}
+          data={video.snippet.id}
+          onPress={() => fetchVidId(video.id.videoId)}
+        >
+          <View>
+            <Text style={styles.name}>{video.snippet.title}</Text>
+            <Text style={styles.details}>{video.snippet.channelTitle}</Text>
+          </View>
+        </TouchableWithoutFeedback>
+      );
+
+      console.log(video.snippet.title);
+      // console.log(video.snippet.channelTitle);
+    });
+    setVideoList(youtubeList);
   }, [posts]);
-  if (videoList > 0) {
-    return <Text>Hallos How are you</Text>;
-    // { videoList };
+  if (posts.length > 0) {
+    return <View>{videoList}</View>;
   }
   return <Text>Hallos</Text>;
 }
 
+// const fetchData=()=>{
+
+// }
+const styles = StyleSheet.create({
+  list: {
+    padding: 20,
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  name: {
+    fontWeight: "bold",
+  },
+  details: {
+    fontWeight: "20px",
+  },
+});
 export default SearchResults;
