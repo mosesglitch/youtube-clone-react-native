@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import SearchVideo from "./app/screens/Navbar";
 import VideoWatch from "./app/screens/VideoWatch";
-import SearchResults from "./app/screens/youtubeAPI";
+import SearchResults from "./app/screens/searchResults";
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,17 +13,18 @@ export default function App() {
   };
   console.log(searchTerm);
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <SearchVideo FetchSearchTerm={FetchSearchTerm} />
-      <SearchResults searchTerm={searchTerm} />
+    <View style={{ flex: 1 }}>
+      {/* <StatusBar /> */}
+      <View style={{ flex: 1 }}>
+        <SearchVideo FetchSearchTerm={FetchSearchTerm} />
+      </View>
+      <View style={{ flex: 4, justifyContent: "center" }}>
+        <View>
+          <SearchResults searchTerm={searchTerm} />
+        </View>
+      </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
+// const styles = StyleSheet.create();

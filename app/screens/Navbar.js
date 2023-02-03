@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
   View,
   Alert,
+  ScrollView,
 } from "react-native";
 // import Icon from "react-native-ionicons";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { EvilIcons } from "@expo/vector-icons";
 const interests = [
   "react",
   "computers",
@@ -33,9 +35,9 @@ const SearchVideo = ({ FetchSearchTerm }) => {
       <View
         style={{
           backgroundColor: "#EAECEE",
-          padding: 10,
-          margin: 10,
-          borderRadius: 15,
+          padding: 4,
+          margin: 5,
+          borderRadius: 10,
           borderWidth: 2,
           borderColor: "#D5D8DC",
         }}
@@ -63,6 +65,7 @@ const SearchVideo = ({ FetchSearchTerm }) => {
           paddingBottom: 20,
           borderBottomColor: "#EAECEE",
           borderBottomWidth: 1,
+          paddingBottom: 30,
         }}
       >
         <View
@@ -72,28 +75,46 @@ const SearchVideo = ({ FetchSearchTerm }) => {
             alignItems: "flex-start",
           }}
         >
-          <Icon
+          {/* <EvilIcons name="sc-youtube" size={24} color="black" /> */}
+          {/* <Icon
             style={{
-              alignSelf: "flex-end",
-              paddingRight: 15,
+              // alignSelf: "flex-end",
+              paddingRight: 5,
+              backgroundColor: "red",
             }}
             name="youtube"
-            size={35}
+            size={100}
             color="red"
             onPress={() => {
+              Alert.alert("Music Icon Clicked");
+            }}
+          /> */}
+          <Icon
+            style={{
+              height: 30,
+              color: "red",
+              alignSelf: "flex-end",
+              paddingRight: 7,
+            }}
+            name="youtube"
+            size={28}
+            color="black"
+            onPress={() => {
+              FetchSearchTerm(text);
               Alert.alert("Music Icon Clicked");
             }}
           />
           <Text
             style={{
-              height: 35,
+              height: 30,
 
               // fontFamily: "Cursive",
               fontWeight: "bold",
-              fontSize: 30,
+              fontSize: 25,
+              alignSelf: "flex-end",
             }}
           >
-            MGW Tube
+            MGW
           </Text>
         </View>
         <View
@@ -127,12 +148,12 @@ const SearchVideo = ({ FetchSearchTerm }) => {
             style={{
               flex: 1,
               flexWrap: "wrap",
-              backgroundColor: "#707B7C",
+              backgroundColor: "#EAECEE",
               borderRadius: 10,
               height: 40,
               alignContent: "center",
               justifyContent: "center",
-              borderColor: "#515A5A",
+              borderColor: "#D5D8DC",
               borderWidth: 1,
             }}
           >
@@ -151,21 +172,24 @@ const SearchVideo = ({ FetchSearchTerm }) => {
           </View>
         </View>
       </View>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          alignItems: "center",
-          // flexWrap: "wrap",
-          marginHorizontal: 15,
-          backgroundColor: "white",
-          padding: 10,
-          borderBottomColor: "#EAECEE",
-          borderBottomWidth: 1,
-        }}
-      >
-        {interestList}
-      </View>
+      <ScrollView horizontal={true} style={styles.container}>
+        <View
+          style={{
+            //   flex: 1,
+            flexDirection: "row",
+            alignItems: "center",
+            height: 50,
+            //   // flexWrap: "wrap",
+            //   marginHorizontal: 1,
+            //   backgroundColor: "white",
+            //   paddingTop: 20,
+            borderBottomColor: "#EAECEE",
+            borderBottomWidth: 1,
+          }}
+        >
+          {interestList}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

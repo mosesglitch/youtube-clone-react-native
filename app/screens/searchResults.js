@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import VideoWatch from "./VideoWatch";
 
@@ -104,7 +105,19 @@ function SearchResults(props) {
     return <View>{videoList}</View>;
   }
   console.log("selected", isSelected);
-  return <Text>Hallos</Text>;
+  console.log(posts.length);
+  return (
+    <View
+      style={{
+        flex: 1,
+        height: 500,
+        backgroundColor: "green ",
+        alignItems: "center",
+      }}
+    >
+      <ActivityIndicator size="large" color="#0000ff" />
+    </View>
+  );
 }
 
 // const fetchData=()=>{
