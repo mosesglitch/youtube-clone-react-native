@@ -2,8 +2,9 @@ import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Text, View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import VideoWatch from "./VideoWatch";
+
 function SearchResults(props) {
-  const query = "black";
+  const query = props.searchTerm;
   const [posts, setPosts] = useState([]);
   const [videoList, setVideoList] = useState([]);
   const [selectedVideoId, setVideoId] = useState();
