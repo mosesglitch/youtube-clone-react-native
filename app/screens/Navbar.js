@@ -40,7 +40,11 @@ const SearchVideo = ({ FetchSearchTerm }) => {
           borderColor: "#D5D8DC",
         }}
       >
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            FetchSearchTerm(interest);
+          }}
+        >
           <Text>{interest}</Text>
         </TouchableOpacity>
       </View>
